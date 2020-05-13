@@ -1,0 +1,137 @@
+﻿@*@model Article*@
+
+@{
+    Layout = "~/Views/Blog/_Layout.cshtml";
+    var articleModel = ViewBag.Article as Article;
+    ViewBag.Title = articleModel.Title;
+}
+
+@section scripts{
+    <style>
+        @@media only screen and (min-width: 1200px) {
+            .blog-g-fixed {
+                max-width: 1200px;
+            }
+        }
+
+        @@media only screen and (min-width: 641px) {
+            .blog-sidebar {
+                font-size: 1.4rem;
+            }
+        }
+
+        .blog-main {
+            padding: 20px 0;
+        }
+
+        .blog-title {
+            margin: 10px 0 20px 0;
+        }
+
+        .blog-meta {
+            font-size: 14px;
+            margin: 10px 0 20px 0;
+            color: #222;
+        }
+
+            .blog-meta a {
+                color: #27ae60;
+            }
+
+        .blog-pagination a {
+            font-size: 1.4rem;
+        }
+
+        .blog-team li {
+            padding: 4px;
+        }
+
+        .blog-team img {
+            margin-bottom: 0;
+        }
+
+        .blog-content img,
+        .blog-team img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .blog-footer {
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        function addUP(id) {
+            //没登陆不让点赞
+            $.post("/api/up".{ id: id },
+                function (data) {
+                    if (data.status) {
+                        $("#upi").text((parseInt( $("#upi").text()) + 1 ));
+                    }
+                    else {
+                        alert("点赞失败");
+                    }
+                }, "json");
+        }
+            //点过不让点
+
+    </script>
+}
+
+<div class="am-g am-g blog-g-fixed" style="margin-top:70px;">
+    <div class="am-u-md-8">
+        <article class="blog-main">
+            <h3 class="am-article-title blog-title">
+                <a href="#">@articleModel.Title</a>
+            </h3>
+            <h4 class="am-article-meta blog-meta">by <a href="">open</a> posted on 2019/12/19  <a href="#">字体</a>
+                <span onclick="addUP(@articleModel.ID)">点赞(<i id="upi">@articleModel.UP</i>)</span>
+            </h4>
+
+            <div class="am-g blog-content">
+                <div class="am-u-lg-12">                   
+                    @Html.Raw(Model.Content)
+                </div>                
+            </div>
+     
+        </article>
+
+        <hr class="am-article-divider blog-hr">
+
+        <hr class="am-article-divider blog-hr">
+        <ul class="am-pagination blog-pagination">
+            <li class="am-pagination-prev"><a href="">&laquo; 上一页</a></li>
+            <li class="am-pagination-next"><a href="">下一页 &raquo;</a></li>
+        </ul>
+    </div>
+
+    <div class="am-u-md-4 blog-sidebar">
+        <div class="am-panel-group">
+            <section class="am-panel am-panel-default">
+                <div class="am-panel-hd">关于我</div>
+                <div class="am-panel-bd">
+                    <p>
+                        前所未有的中文云端字型服务，让您在 web 平台上自由使用高品质中文字体，跨平台、可搜寻，而且超美。云端字型是我们的事业，推广字型学知识是我们的志业。从字体出发，关心设计与我们的生活，justfont blog
+                        正是為此而生。
+                    </p>
+                    <a class="am-btn am-btn-success am-btn-sm" href="#">查看更多 →</a>
+                </div>
+            </section>
+            <section class="am-panel am-panel-default">
+                <div class="am-panel-hd">文章目录</div>
+                <ul class="am-list blog-list">
+                    <li><a href="#">Google fonts 的字體（sans-serif 篇）</a></li>
+                    <li><a href="#">[but]服貿最前線？－再訪桃園機場</a></li>
+                    <li><a href="#">到日星鑄字行學字型</a></li>
+                    <li><a href="#">glyph font vs. 漢字（上）</a></li>
+                    <li><a href="#">浙江民間書刻體上線</a></li>
+                    <li><a href="#">[極短篇] Android v.s iOS，誰的字體好讀？</a></li>
+                </ul>
+            </section>
+           
+        </div>
+    </div>
+
+</div>
+

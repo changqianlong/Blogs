@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>@ViewBag.Title</title>
+    <link href="~/Areas/Admin/Content/css/admin.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/pintuer.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/Content/js/jquery.js"></script>
+    <script src="~/Areas/Admin/Content/js/pintuer.js"></script>
+
+    @section scripts{
+
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <style type="text/css">
+            .field-validation-error {
+                color: red;
+            }
+        </style>
+        }
+       @RenderSection("scripts",false)
+    </head>
+<body>
+    <div class="panel admin-panel">
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+﻿@{
+    var LoginUser = Session["loginUser"] as Blogs.Web.Models.User;
+    var LoginBlog = Session["loginBlog"] as Blogs.Web.Models.Blog;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Landing Page | Amaze UI Example</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="alternate icon" type="image/png" href="~/Content/AmazeUI-2.7.2assets/i/favicon.png">
+    <link href="~/Content/AmazeUI-2.7.2/assets/css/amazeui.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <style>
+        .get {
+            background: #1E5B94;
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .get-title {
+            font-size: 200%;
+            border: 2px solid #fff;
+            padding: 20px;
+            display: inline-block;
+        }
+
+        .get-btn {
+            background: #fff;
+        }
+
+        .detail {
+            background: #fff;
+        }
+
+        .detail-h2 {
+            text-align: center;
+            font-size: 150%;
+            margin: 40px 0;
+        }
+
+        .detail-h3 {
+            color: #1f8dd6;
+        }
+
+        .detail-p {
+            color: #7f8c8d;
+        }
+
+        .detail-mb {
+            margin-bottom: 30px;
+        }
+
+        .hope {
+            background: #0bb59b;
+            padding: 50px 0;
+        }
+
+        .hope-img {
+            text-align: center;
+        }
+
+        .hope-hr {
+            border-color: #149C88;
+        }
+
+        .hope-title {
+            font-size: 140%;
+        }
+
+        .about {
+            background: #fff;
+            padding: 40px 0;
+            color: #7f8c8d;
+        }
+
+        .about-color {
+            color: #34495e;
+        }
+
+        .about-title {
+            font-size: 180%;
+            padding: 30px 0 50px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #7f8c8d;
+            margin: 0;
+            padding: 15px 0;
+            text-align: center;
+            background: #2d3e50;
+        }
+    </style>
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <header class="am-topbar am-topbar-inverse">
+        <div class="am-container">
+            <h1 class="am-topbar-brand">
+                <a href="#">博客小园</a>
+            </h1>
+
+            <div class="am-collapse am-topbar-collapse" id="collapse-head">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <li class="am-active"><a href="/">首页</a></li>
+                    <li><a href="#">咨询</a></li>
+                    <li class="am-dropdown" data-am-dropdown>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+                            栏目 <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li class="am-dropdown-header">园子栏目</li>
+                            <li><a href="#">.NET技术</a></li>
+                            <li><a href="#">Java技术</a></li>
+                            <li><a href="#">SQL技术</a></li>
+                            <li><a href="#">辩论技巧</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only"
+                        data-am-collapse="{target: '#collapse-head'}">
+                    <span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
+                </button>
+
+                <v class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+                    <form class="am-topbar-form am-topbar-left am-form-inline am-topbar-right" role="search">
+                        <div class="am-form-group">
+                            <input type="text" class="am-form-field am-input-sm" placeholder="搜索文章">
+                        </div>
+                        <button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+                    </form>                
+                    <div class="am-collapse am-topbar-collapse" id="collapse-head">
+                        @if (LoginUser == null)
+                        {
+                            <div class="am-topbar-right">
+                                <button class="am-btn am-btn-warning am-topbar-btn am-btn-sm" onclick="window.location.href='/Home/register'"><span class="am-icon-user"></span> 注册</button>
+                            </div>
+
+                            <div class="am-topbar-right">
+                                <button class="am-btn am-btn-success am-topbar-btn am-btn-sm" onclick="window.location.href='/Home/Login'"><span class="am-icon-user"></span> 登录</button>
+                            </div>
+                        }
+                        else
+                        {
+
+
+                            if (LoginBlog == null)
+                            {
+                                <button class="am-btn am-btn-success am-topbar-btn am-btn-sm" onclick="window.location.href='/Admin/home/index'"><span class="am-icon-user"></span> 申请博客</button>
+                            }
+                            else
+                            {
+                                <div class="am-topbar-right">
+                                    <button class="am-btn am-btn-warning am-topbar-btn am-btn-sm" onclick="window.location.href='/Admin/home/index'"><span class="am-icon-user"></span> 管理</button>
+                                </div>
+
+                                <div class="am-topbar-right">
+                                    <button class="am-btn am-btn-success am-topbar-btn am-btn-sm" onclick="window.location.href='/@LoginBlog.Identity'"><span class="am-icon-user"></span> 我的博客</button>
+                                </div>
+                            }
+
+                        }
+
+                    </div>
+            </div>
+        </div>
+
+
+
+    </header>
+
+
+    @RenderBody()
+
+    <footer class="footer">
+        <p>
+            © @DateTime.Now.Year <a href="#" target="_blank">AllMobilize, Inc.</a> Licensed under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>. by 乾子.
+        </p>
+    </footer>
+
+    <!--[if lt IE 9]>
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+    <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+    <![endif]-->
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="assets/js/jquery.min.js"></script>
+    <!--<![endif]-->
+    <script src="~/Content/AmazeUI-2.7.2/assets/js/amazeui.min.js"></script>
+</body>
+</html>
+
+

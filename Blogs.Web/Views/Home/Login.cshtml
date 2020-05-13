@@ -1,0 +1,56 @@
+﻿@model UserLogin
+@using BotDetect.Web.Mvc;
+@{
+    ViewBag.Title = "登陆";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+     MvcCaptcha exampleCaptcha = new MvcCaptcha("ExampleCaptcha");
+        exampleCaptcha.UserInputID = "VelidateCode";
+   
+}
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <style type="text/css">
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+    <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+}
+<div class="am-g" style="margin-top:50px;">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+        <h1 style="text-align:center;">登陆</h1>
+        <hr>
+        <form method="post" class="am-form" action="/home/login">
+            <label for="Name">用户名:</label>
+            @Html.TextBoxFor(m => m.Name, new { @type = "text" })
+            @Html.ValidationMessageFor(m => m.Name)
+            <br>
+            <label for="password">密码:</label>
+            @Html.PasswordFor(m => m.Pwd, new { @type = "password" })
+            @Html.ValidationMessageFor(m => m.Pwd)
+            <br>
+            <label for="Name">验证码:</label>
+            @Html.TextBoxFor(m => m.VelidateCode, new { @type = "text" })
+            @Html.ValidationMessageFor(m => m.VelidateCode)
+            <br>
+            @Html.Captcha(exampleCaptcha)
+            <br>
+            <label for="remember-me">
+                <input id="remember-me" type="checkbox">
+                记住密码
+            </label>
+            <br />
+            <div class="am-cf">
+                <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
+                <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
+
+            </div>
+        </form>
+        <hr>
+    </div>
+</div>
